@@ -14,6 +14,11 @@ export interface Config extends Plugin.Name<'@hey-api/transformers'> {
    */
   dates?: boolean;
   /**
+   * Convert null or undefined values for array schemas into empty arrays?
+   */
+  emptyArrays?: boolean;
+
+  /**
    * Name of the generated file.
    *
    * @default 'transformers'

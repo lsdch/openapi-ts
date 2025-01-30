@@ -283,7 +283,13 @@ const processSchemaType = ({
         left: dataExpression,
         right: compiler.callExpression({
           functionName: compiler.propertyAccessExpression({
-            expression: dataExpression,
+            expression: plugin.emptyArrays
+              ? compiler.binaryExpression({
+                  left: dataExpression,
+                  operator: '??',
+                  right: compiler.arrayLiteralExpression({ elements: [] }),
+                })
+              : dataExpression,
             name: 'map',
           }),
           parameters: [

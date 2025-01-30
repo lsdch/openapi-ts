@@ -447,7 +447,12 @@ const objectTypeToIdentifier = ({
 
   for (const name in schema.properties) {
     const property = schema.properties[name]!;
-    const isRequired = required.includes(name);
+    const isRequired =
+      required.includes(name) &&
+      !(
+        context.config.plugins['@hey-api/transformers']?.emptyArrays &&
+        property.type === 'array'
+      );
     schemaProperties.push({
       comment: parseSchemaJsDoc({ schema: property }),
       isReadOnly: property.accessScope === 'read',
